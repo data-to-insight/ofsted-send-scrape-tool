@@ -1113,7 +1113,7 @@ def save_to_html(data, column_order, local_link_column=None, web_link_column=Non
     disclaimer_text = (
         'Disclaimer: This summary is built from scraped data direct from https://reports.ofsted.gov.uk/ published PDF inspection report files. '
         'As a result of the nuances|variance within the inspection report content or pdf encoding, we\'re noting some problematic data extraction for a small number of LAs*.<br/> '
-        '*Known LA extraction issues: <br/>'
+        '*Known LA extraction issues: Enfield(Next Inspection+Next Inspection By Date), Oxfordshire(Next Inspection+Next Inspection By Date)<br/>'
         '<a href="mailto:datatoinsight.enquiries@gmail.com?subject=Ofsted-Scrape-Tool">Feedback</a> on specific problems|inaccuracies|suggestions welcomed.*'
     )
 
