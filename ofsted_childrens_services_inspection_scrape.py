@@ -285,7 +285,7 @@ def extract_dates_from_text(text):
         #   vi)     white spaces between date numbers e.g. "wiltshire,	1 9 June 2019"
         #   vii)    'None' years where no recognisable was found
     """
-    print("Debug: Starting date extraction")
+    # print("Debug: Starting date extraction")
 
     if not text:
         print("Debug: Input text is empty or None.")
@@ -294,83 +294,84 @@ def extract_dates_from_text(text):
     # Remove non-printing characters and multiple spaces
     cleaned_text = re.sub(r'[^\x20-\x7E]', '', text)
     cleaned_text = re.sub(r'\s+', ' ', cleaned_text)
-    print(f"Debug: Cleaned text: {cleaned_text}")
+
+    # Preprocess the inspection_dates to fix split years, e.g. 20 23, 20 24 -> 2023, 2024
+    cleaned_text = re.sub(r"(\b20)\s+(\d{2}\b)", r"\1\2", cleaned_text)
+    #print(f"Debug: Cleaned text: {cleaned_text}")
+
+
+
 
     # Try to capture date ranges correctly
-    date_match = re.search(r"Inspection dates:\s*(.+?)(?=\s{2,}|$)", cleaned_text)
+    # date_match = re.search(r"Inspection dates:\s*(.+?)(?=\s{2,}|$)", cleaned_text) - doesnt work for oxfordshire
+    # date_match = re.search(r"Inspection dates\s*:\s*(\d{1,2}(?: to \d{1,2})? \w+ \d{4})", cleaned_text)
+
+    # # Not implemented. But in case need to handle cases of repeating year alongside known repeating month "13 July 2023 to 21 July 2023" e.g. West Sussex
+    # date_match = re.search(r"Inspection dates\s*:\s*(\d{1,2}(?: \w+ \d{4})?(?: to \d{1,2})? \w+ \d{4})", cleaned_text)
+    date_match = re.search(r"Inspection dates\s*:\s*(\d{1,2} \w+ \d{4}) to (\d{1,2} \w+ \d{4})", cleaned_text)
+
+
     if date_match:
-        print(f"Debug: Primary date match found: {date_match.group(0)}")
+        #print(f"Debug: Primary date match found: {date_match.group(0)}")
+        # Extract start and end dates directly from the match
+        start_date_str = date_match.group(1).strip()
+        end_date_str = date_match.group(2).strip()
     else:
-        print("Debug: Primary date match not found, trying fallback method")
-        # Fallback to capturing until the end of the line
-        date_match = re.search(r"Inspection dates:\s*(.+)", cleaned_text)
+        #print("Debug: Primary date match not found, trying fallback method")
+        # Fallback to capturing single date or simpler range within the same month
+        date_match = re.search(r"Inspection dates\s*:\s*(\d{1,2}) to (\d{1,2}) (\w+) (\d{4})", cleaned_text)
+
         if date_match:
-            print(f"Debug: Fallback date match found: {date_match.group(0)}")
+            #print(f"Debug: Fallback date match found: {date_match.group(0)}")
+            start_day = date_match.group(1)
+            end_day = date_match.group(2)
+            month = date_match.group(3)
+            year = date_match.group(4)
+
+            start_date_str = f"{start_day} {month} {year}"
+            end_date_str = f"{end_day} {month} {year}"
+
         else:
             print("Debug: No inspection dates found.")
             raise ValueError("No inspection dates found")
 
-    inspection_dates = date_match.group(1).strip() if date_match else None
+    # Clean and format the extracted dates
+    try:
+        start_date = datetime.strptime(start_date_str, "%d %B %Y").strftime("%d/%m/%y")
+        end_date = datetime.strptime(end_date_str, "%d %B %Y").strftime("%d/%m/%y")
+        #print(f"Debug: Formatted start date: {start_date}")
+        #print(f"Debug: Formatted end date: {end_date}")
+    except ValueError as ve:
+        print(f"Error converting date: {ve}")
+        raise ValueError("Date conversion failed")
 
-    if not inspection_dates:
-        print("Debug: Extracted inspection dates are empty or None.")
-        raise ValueError("No inspection dates found")
+    # Now handle previous inspection dates if present in the same cleaned_text
+    previous_inspection_match = re.search(r"Dates? of previous inspection:\s*(\d{1,2}) to (\d{1,2}) (\w+) (\d{4})", cleaned_text)
+    if previous_inspection_match:
+        #print(f"Debug: Previous inspection match found: {previous_inspection_match.groups()}")
+        previous_start_day = previous_inspection_match.group(1)
+        previous_end_day = previous_inspection_match.group(2)
+        previous_month = previous_inspection_match.group(3)
+        previous_year = previous_inspection_match.group(4)
 
-    print(f"Debug: Extracted inspection dates: {inspection_dates}")
-
-    # Initial clean up based on historic data obs
-    inspection_dates = inspection_dates.replace(".", "")
-    inspection_dates = inspection_dates.replace("\u00A0", " ")  # Remove non-breaking space
-    inspection_dates = re.sub(r"[\u2012\u2013\u2014\u2212\-]+", " to ", inspection_dates)  # replace dashes with "to"
-    inspection_dates = inspection_dates.split("and")[0].strip()  # Handle multiple date ranges
-    inspection_dates = re.sub(r'(\d)\s(\d)', r'\1\2', inspection_dates)  # Fix white spaces between date numbers
-
-    print(f"Debug: Cleaned inspection dates: {inspection_dates}")
-
-    # Extract start and end dates
-    date_range_match = re.match(r"(\d{1,2}) to (\d{1,2}) (\w+) (\d{4})", inspection_dates)
-    if date_range_match:
-        print(f"Debug: Date range match found: {date_range_match.groups()}")
-        start_day = date_range_match.group(1)
-        end_day = date_range_match.group(2)
-        month = date_range_match.group(3)
-        year = date_range_match.group(4)
-
-        start_date_str = f"{start_day} {month} {year}"
-        end_date_str = f"{end_day} {month} {year}"
-
-        print(f"Debug: Start date string: {start_date_str}")
-        print(f"Debug: End date string: {end_date_str}")
+        previous_end_date_str = f"{previous_end_day} {previous_month} {previous_year}"
 
         try:
-            # Convert to desired format
-            start_date = datetime.strptime(start_date_str, "%d %B %Y").strftime("%d/%m/%y")
-            end_date = datetime.strptime(end_date_str, "%d %B %Y").strftime("%d/%m/%y")
-            print(f"Debug: Formatted start date: {start_date}")
-            print(f"Debug: Formatted end date: {end_date}")
-            return start_date, end_date
+            previous_end_date = datetime.strptime(previous_end_date_str, "%d %B %Y").strftime("%d/%m/%Y")
+            #print(f"Debug: Formatted previous inspection end date: {previous_end_date}")
         except ValueError as ve:
-            print(f"Error converting date: {ve}")
-            raise ValueError("Date conversion failed")
-
+            print(f"Error converting previous inspection date: {ve}")
+            previous_end_date = "01/01/1900"  # Placeholder date for conversion errors
     else:
-        print("Debug: Date range not found, trying single date format")
-        # Fallback for single date format
-        single_date_match = re.match(r"(\d{1,2}) (\w+) (\d{4})", inspection_dates)
-        if single_date_match:
-            print(f"Debug: Single date match found: {single_date_match.groups()}")
-            single_date_str = f"{single_date_match.group(1)} {single_date_match.group(2)} {single_date_match.group(3)}"
-            print(f"Debug: Single date string: {single_date_str}")
-            try:
-                single_date = datetime.strptime(single_date_str, "%d %B %Y").strftime("%d/%m/%y")
-                print(f"Debug: Formatted single date: {single_date}")
-                return single_date, single_date
-            except ValueError as ve:
-                print(f"Error converting single date: {ve}")
-                raise ValueError("Single date conversion failed")
-        else:
-            print(f"Debug: No date format matched. Inspection dates: {inspection_dates}")
-            raise ValueError("Date format is incorrect")
+        #print("Debug: No previous inspection date found, using placeholder.")
+        previous_end_date = "01/01/1900"  # Placeholder date if no match found
+
+    # Final debug print to verify results
+    print(f"\nStart Date: {start_date}, End Date: {end_date}, Previous Inspection End Date: {previous_end_date}")
+    
+    return start_date, end_date, previous_end_date
+
+
 
 
 
@@ -438,16 +439,40 @@ def extract_inspection_data_update(pdf_content):
 
     # extract and format inspection dates
     try:
-        start_date_formatted, end_date_formatted = extract_dates_from_text(first_page_text)
+        # Attempt to extract and format dates
+        start_date_formatted, end_date_formatted, previous_inspection_date = extract_dates_from_text(first_page_text)
+        
+        # Validate the start date
+        try:
+            datetime.strptime(start_date_formatted, "%d/%m/%y")
+        except (ValueError, TypeError) as e:
+            print(f"Error with start date: {e}")
+            start_date_formatted = None
+        
+        # Validate the end date
+        try:
+            datetime.strptime(end_date_formatted, "%d/%m/%y")
+        except (ValueError, TypeError) as e:
+            print(f"Error with end date: {e}")
+            end_date_formatted = None
+        
+        # Validate the previous inspection date
+        try:
+            datetime.strptime(previous_inspection_date, "%d/%m/%Y")
+        except (ValueError, TypeError) as e:
+            print(f"Error with previous inspection date: {e}")
+            previous_inspection_date = None
 
     except ValueError as e:
-        # we didnt get any usable dates
+        # If there was a broader issue with the extraction function itself
         start_date_formatted = None
         end_date_formatted = None
-
+        previous_inspection_date = None
         print(f"Error: {e}")
 
-    # end test block
+        
+
+        # end test block
 
 
     return {
@@ -456,6 +481,7 @@ def extract_inspection_data_update(pdf_content):
         # 'overall_inspection_grade': inspection_grades_dict['overall_effectiveness'],
         'inspection_start_date':    start_date_formatted,
         'inspection_end_date':      end_date_formatted,
+        'previous_inspection_date': previous_inspection_date
 
     #     # inspection sentiments (in progress)
     #     'sentiment_score':          round(sentiment_val, 4), 
@@ -656,7 +682,7 @@ def calculate_next_inspection_by_date(last_inspection_date, next_inspection_time
 
     # Extract number and unit from next_inspection_timeframe
     pattern = re.compile(r"(\d+) (years?|months?)", re.IGNORECASE)
-    print(type(next_inspection_timeframe))  # testing
+    # print(type(next_inspection_timeframe))  # testing
     match = pattern.search(next_inspection_timeframe)
     
     if match:
@@ -672,8 +698,8 @@ def calculate_next_inspection_by_date(last_inspection_date, next_inspection_time
             next_inspection_date = last_inspection_date_parsed + relativedelta(months=number)
         
         # testing
-        outgoing = next_inspection_date.strftime("%d/%m/%y")
-        print(f"calculate_next_inspection_by_date/next_date: {outgoing}")  # testing
+        #outgoing = next_inspection_date.strftime("%d/%m/%y")
+        #print(f"calculate_next_inspection_by_date/next_date: {outgoing}")  # testing
 
         return next_inspection_date.strftime("%d/%m/%y")
     
@@ -886,12 +912,13 @@ def process_provider_links(provider_links):
                         # inspector_name = inspection_data_dict['inspector_name']
                         inspection_start_date = inspection_data_dict['inspection_start_date']
                         inspection_end_date = inspection_data_dict['inspection_end_date']
-          
+                        previous_inspection_date = inspection_data_dict['previous_inspection_date']
 
 
                         # format dates for output                       
                         inspection_start_date_formatted = format_date_for_report(inspection_start_date, "%d/%m/%y")
                         inspection_end_date_formatted = format_date_for_report(inspection_end_date, "%d/%m/%y")
+                        previous_inspection_date_formatted = format_date_for_report(previous_inspection_date, "%d/%m/%Y") # Note YYYY not yy (required for placeholder date)
 
                         # Format the provider directory as a file path link (in readiness for such as Excel)
                         provider_dir_link = f"{provider_dir}"
@@ -902,35 +929,38 @@ def process_provider_links(provider_links):
                         print(f"{local_authority}") # Gives listing console output during run in the format 'data/inspection reports/urn name_of_la'
 
                         # testing
-                        print(f"next_inspection: {next_inspection}")
+                        #print(f"next_inspection: {next_inspection}")
 
                         # testing
-                        print(f"Dict: {inspection_data_dict}")
-                        print(f"inspection_start_date_formatted: {inspection_start_date}")
-                        print(f"inspection_end_date_formatted: {inspection_end_date}")
-                        print(f"inspection_start_date_formatted: {inspection_start_date_formatted}")
-                        print(f"inspection_end_date_formatted: {inspection_end_date_formatted} | next_inspection: {next_inspection}")
+                        #print(f"Dict: {inspection_data_dict}")
+                        #print(f"inspection_start_date_formatted: {inspection_start_date}")
+                        #print(f"inspection_end_date_formatted: {inspection_end_date}")
+                        #print(f"inspection_start_date_formatted: {inspection_start_date_formatted}")
+                        #print(f"inspection_end_date_formatted: {inspection_end_date_formatted} | next_inspection: {next_inspection}")
 
                         # problematic end date, means more likely to get success on start date (only 2/3 days difference)
                         next_inspection_by_date = calculate_next_inspection_by_date(inspection_start_date_formatted, next_inspection)
 
                         # testing
-                        print(f"next_inspection_by_date(after processing): {next_inspection_by_date}")
+                        #print(f"next_inspection_by_date(after processing): {next_inspection_by_date}")
 
                         data.append({
                                         'urn': urn,
-                                        'local_authority':  la_name_str,
-                                        'inspection_link':  inspection_link,
-                                        'outcome_grade':    outcome_grade,
-                                        'next_inspection':  next_inspection,
-                                        # 'inspection_framework': inspection_framework,
-                                        # 'inspector_name': inspector_name,
-                                        'inspection_start_date': inspection_start_date_formatted,
-                                        'inspection_end_date': inspection_end_date_formatted,
-                                        'publication_date': report_published_date,
-                                        'next_inspection_by_date': next_inspection_by_date,
+                                        'local_authority':          la_name_str,
+                                        'inspection_link':          inspection_link,
+                                        'outcome_grade':            outcome_grade,
+
+                                        'previous_inspection_date': previous_inspection_date_formatted,
+                                        'inspection_start_date':    inspection_start_date_formatted,
+                                        'inspection_end_date':      inspection_end_date_formatted,
+                                        'publication_date':         report_published_date,
+                                        'next_inspection':          next_inspection,
+                                        'next_inspection_by_date':  next_inspection_by_date,
                                         'local_link_to_all_inspections': provider_dir_link,
-                                        'inspection_outcome_text': inspection_outcome_section,
+                                        'inspection_outcome_text':  inspection_outcome_section,
+
+                                        # 'inspection_framework':   inspection_framework,
+                                        # 'inspector_name':         inspector_name,
 
                                         # 'sentiment_score': sentiment_score,
                                         # 'sentiment_summary': sentiment_summary,
@@ -1000,7 +1030,7 @@ def save_data_update(data, filename, file_type='csv', hyperlink_column = None):
         print(f"Error: unsupported file type '{file_type}'. Please choose 'csv' or 'excel'.")
         return
 
-    print(f"{filename_with_extension} successfully created!")
+    print(f"\n\n{filename_with_extension} successfully created!")
 
 
 
@@ -1113,7 +1143,7 @@ def save_to_html(data, column_order, local_link_column=None, web_link_column=Non
     disclaimer_text = (
         'Disclaimer: This summary is built from scraped data direct from https://reports.ofsted.gov.uk/ published PDF inspection report files. '
         'As a result of the nuances|variance within the inspection report content or pdf encoding, we\'re noting some problematic data extraction for a small number of LAs*.<br/> '
-        '*Known LA extraction issues: Enfield(Next Inspection+Next Inspection By Date), Oxfordshire(Next Inspection+Next Inspection By Date)<br/>'
+        '*Known LA extraction issues: 01/01/1900 == No-date-data|unreadble, Enfield(Next Inspection Date not showing)<br/>'
         '<a href="mailto:datatoinsight.enquiries@gmail.com?subject=Ofsted-Scrape-Tool">Feedback</a> on specific problems|inaccuracies|suggestions welcomed.*'
     )
 
@@ -1245,7 +1275,7 @@ def save_to_html(data, column_order, local_link_column=None, web_link_column=Non
     with open("index.html", "w") as f:
         f.write(html_content)
 
-    print("SEND summary page as index.html successfully created.")
+    print("SEND summary page as index.html successfully created!")
 
 
 
@@ -1345,9 +1375,11 @@ save_data_update(send_inspection_summary_df, export_summary_filename, file_type=
 # Remove for now until link fixed applied: 'local_link_to_all_inspections',
 column_order = [
                 'urn','la_code','region_code','ltla23cd','local_authority',
+                'previous_inspection_date',
+                'inspection_start_date', 'inspection_end_date',
                 'outcome_grade', 
-                'inspection_start_date', 'inspection_end_date', 'publication_date', 'next_inspection', 'next_inspection_by_date',
                 'inspection_outcome_text',
+                'publication_date', 'next_inspection', 'next_inspection_by_date',
                 #'local_link_to_all_inspections', 
                 'inspection_link'
                 ]

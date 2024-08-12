@@ -25,8 +25,8 @@
     <body>
         <h1>Ofsted CS SEND Inpections Overview</h1>
         <p>Summarised outcomes of published short and standard SEND inspection reports by Ofsted, refreshed weekly.<br/>An expanded version of the shown summary sheet, refreshed concurrently, is available to <a href="ofsted_childrens_services_send_overview.xlsx">download here</a> as an .xlsx file. <br/>Data summary is based on the original <i>SEND Outcomes Summary</i> published periodically by the ADCS: <a href="https://www.adcs.org.uk/inspection-of-childrens-services/">https://www.adcs.org.uk/inspection-of-childrens-services/</a>. <a href="https://github.com/data-to-insight/ofsted-send-scrape-tool/blob/main/README.md">Read the tool/project background details and future work.</a>.</p>
-        <p>Disclaimer: This summary is built from scraped data direct from https://reports.ofsted.gov.uk/ published PDF inspection report files. As a result of the nuances|variance within the inspection report content or pdf encoding, we're noting some problematic data extraction for a small number of LAs*.<br/> *Known LA extraction issues: Enfield(Next Inspection+Next Inspection By Date), Oxfordshire(Next Inspection+Next Inspection By Date)<br/><a href="mailto:datatoinsight.enquiries@gmail.com?subject=Ofsted-Scrape-Tool">Feedback</a> on specific problems|inaccuracies|suggestions welcomed.*</p>
-        <p><b>Summary data last updated: 12 08 2024 09:31</b></p>
+        <p>Disclaimer: This summary is built from scraped data direct from https://reports.ofsted.gov.uk/ published PDF inspection report files. As a result of the nuances|variance within the inspection report content or pdf encoding, we're noting some problematic data extraction for a small number of LAs*.<br/> *Known LA extraction issues: 01/01/1900 == No-date-data|unreadble, Enfield(Next Inspection Date not showing)<br/><a href="mailto:datatoinsight.enquiries@gmail.com?subject=Ofsted-Scrape-Tool">Feedback</a> on specific problems|inaccuracies|suggestions welcomed.*</p>
+        <p><b>Summary data last updated: 12 08 2024 17:34</b></p>
         <p><b>LA inspections last updated: []</b></p>
         <div class="container">
     <table border="1" class="dataframe">
@@ -37,13 +37,14 @@
       <th>Region Code</th>
       <th>LTLA23CD</th>
       <th>Local Authority</th>
-      <th>Outcome Grade</th>
+      <th>Previous Inspection Date</th>
       <th>Inspection Start Date</th>
       <th>Inspection End Date</th>
+      <th>Outcome Grade</th>
+      <th>Inspection Outcome Text</th>
       <th>Publication Date</th>
       <th>Next Inspection</th>
       <th>Next Inspection By Date</th>
-      <th>Inspection Outcome Text</th>
       <th>Inspection Link</th>
     </tr>
   </thead>
@@ -54,13 +55,14 @@
       <td>NW</td>
       <td>E06000009</td>
       <td>blackpool</td>
-      <td>2</td>
+      <td>01/01/1900</td>
       <td>20/05/24</td>
       <td>24/05/24</td>
+      <td>2</td>
+      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately three years.</td>
       <td>25/07/24</td>
       <td>3 years</td>
       <td>20/05/27</td>
-      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately three years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50253401">ofsted.gov.uk/50253401</a></td>
     </tr>
     <tr>
@@ -69,13 +71,14 @@
       <td>SE</td>
       <td>E06000043</td>
       <td>brighton and hove</td>
+      <td>01/01/1900</td>
+      <td>27/03/23</td>
+      <td>31/03/23</td>
       <td>1</td>
-      <td>27/03/23</td>
-      <td>27/03/23</td>
+      <td>The local area partnership’s arrangements typically lead to positive experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership is taking action where improvements are needed.  The next full Area SEND inspection will be within approximately 5 years.</td>
       <td>31/05/23</td>
       <td>5 years</td>
       <td>27/03/28</td>
-      <td>The local area partnership’s arrangements typically lead to positive experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership is taking action where improvements are needed.  The next full Area SEND inspection will be within approximately 5 years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50218659">ofsted.gov.uk/50218659</a></td>
     </tr>
     <tr>
@@ -84,13 +87,14 @@
       <td>NW</td>
       <td>E08000002</td>
       <td>bury</td>
-      <td>3</td>
+      <td>15/05/2019</td>
       <td>12/02/24</td>
       <td>16/02/24</td>
+      <td>3</td>
+      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND), which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full reinspection will be within approximately three years.</td>
       <td>07/05/24</td>
       <td>18 months</td>
       <td>12/08/25</td>
-      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND), which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full reinspection will be within approximately three years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50246030">ofsted.gov.uk/50246030</a></td>
     </tr>
     <tr>
@@ -99,13 +103,14 @@
       <td>YH</td>
       <td>E08000036</td>
       <td>wakefield</td>
-      <td>1</td>
+      <td>01/01/1900</td>
       <td>18/03/24</td>
       <td>22/03/24</td>
+      <td>1</td>
+      <td>The local area partnership’s special educational needs and/or disabilities (SEND) arrangements typically lead to positive experiences and outcomes for children and young people with SEND. The local area partnership is taking action where improvements are needed.  The next full area SEND inspection will be within approximately five years.</td>
       <td>26/07/24</td>
       <td>5 years</td>
       <td>18/03/29</td>
-      <td>The local area partnership’s special educational needs and/or disabilities (SEND) arrangements typically lead to positive experiences and outcomes for children and young people with SEND. The local area partnership is taking action where improvements are needed.  The next full area SEND inspection will be within approximately five years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50253460">ofsted.gov.uk/50253460</a></td>
     </tr>
     <tr>
@@ -114,13 +119,14 @@
       <td>SW</td>
       <td>E06000052</td>
       <td>cornwall</td>
-      <td>2</td>
+      <td>07/07/2017</td>
       <td>06/02/23</td>
       <td>10/02/23</td>
+      <td>2</td>
+      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately 3 years.</td>
       <td>05/05/23</td>
       <td>3 years</td>
       <td>06/02/26</td>
-      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately 3 years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50215730">ofsted.gov.uk/50215730</a></td>
     </tr>
     <tr>
@@ -129,13 +135,14 @@
       <td>SW</td>
       <td>E10000009</td>
       <td>dorset</td>
-      <td>1</td>
+      <td>27/01/2017</td>
       <td>11/03/24</td>
       <td>15/03/24</td>
+      <td>1</td>
+      <td>The local area partnership’s special educational needs and/or disabilities (SEND) arrangements typically lead to positive experiences and outcomes for children and young people with SEND. The local area partnership is taking action where improvements are needed.  The next full area SEND inspection will be within approximately five years.</td>
       <td>15/05/24</td>
       <td>5 years</td>
       <td>11/03/29</td>
-      <td>The local area partnership’s special educational needs and/or disabilities (SEND) arrangements typically lead to positive experiences and outcomes for children and young people with SEND. The local area partnership is taking action where improvements are needed.  The next full area SEND inspection will be within approximately five years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50246984">ofsted.gov.uk/50246984</a></td>
     </tr>
     <tr>
@@ -144,13 +151,14 @@
       <td>NE</td>
       <td>E08000037</td>
       <td>gateshead</td>
-      <td>2</td>
+      <td>10/02/2017</td>
       <td>22/05/23</td>
       <td>26/05/23</td>
+      <td>2</td>
+      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately 3 years.</td>
       <td>24/07/23</td>
       <td>3 years</td>
       <td>22/05/26</td>
-      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately 3 years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50224180">ofsted.gov.uk/50224180</a></td>
     </tr>
     <tr>
@@ -159,13 +167,14 @@
       <td>SW</td>
       <td>E10000013</td>
       <td>gloucestershire</td>
-      <td>2</td>
+      <td>01/01/1900</td>
       <td>11/12/23</td>
       <td>15/12/23</td>
+      <td>2</td>
+      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately three years.</td>
       <td>01/03/24</td>
       <td>3 years</td>
       <td>11/12/26</td>
-      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately three years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50240683">ofsted.gov.uk/50240683</a></td>
     </tr>
     <tr>
@@ -174,13 +183,14 @@
       <td>NW</td>
       <td>E06000006</td>
       <td>halton</td>
-      <td>3</td>
+      <td>31/03/2017</td>
       <td>20/11/23</td>
       <td>24/11/23</td>
+      <td>3</td>
+      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND), which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full reinspection will be within approximately three years.</td>
       <td>26/01/24</td>
       <td>18 months</td>
       <td>20/05/25</td>
-      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND), which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full reinspection will be within approximately three years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50238390">ofsted.gov.uk/50238390</a></td>
     </tr>
     <tr>
@@ -189,13 +199,14 @@
       <td>NE</td>
       <td>E06000001</td>
       <td>hartlepool</td>
+      <td>07/10/2016</td>
+      <td>13/03/23</td>
+      <td>17/03/23</td>
       <td>1</td>
-      <td>13/03/23</td>
-      <td>13/03/23</td>
+      <td>The local area partnership’s arrangements typically lead to positive experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership is taking action where improvements are needed.  The next full area SEND inspection will be within approximately 5 years.</td>
       <td>16/05/23</td>
       <td>5 years</td>
       <td>13/03/28</td>
-      <td>The local area partnership’s arrangements typically lead to positive experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership is taking action where improvements are needed.  The next full area SEND inspection will be within approximately 5 years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50216721">ofsted.gov.uk/50216721</a></td>
     </tr>
     <tr>
@@ -204,13 +215,14 @@
       <td>E</td>
       <td>E10000015</td>
       <td>hertfordshire</td>
-      <td>3</td>
+      <td>08/07/2016</td>
       <td>10/07/23</td>
       <td>14/07/23</td>
+      <td>3</td>
+      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND), which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full reinspection will be within approximately 3 years.</td>
       <td>10/11/23</td>
       <td>18 months</td>
       <td>10/01/25</td>
-      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND), which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full reinspection will be within approximately 3 years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50232445">ofsted.gov.uk/50232445</a></td>
     </tr>
     <tr>
@@ -219,13 +231,14 @@
       <td>YH</td>
       <td>E06000010</td>
       <td>kingston upon hull</td>
-      <td>2</td>
+      <td>17/10/2019</td>
       <td>20/11/23</td>
       <td>24/11/23</td>
+      <td>2</td>
+      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately three years.</td>
       <td>02/02/24</td>
       <td>3 years</td>
       <td>20/11/26</td>
-      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately three years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50238910">ofsted.gov.uk/50238910</a></td>
     </tr>
     <tr>
@@ -234,13 +247,14 @@
       <td>GL</td>
       <td>E09000004</td>
       <td>bexley</td>
+      <td>01/01/1900</td>
+      <td>04/12/23</td>
+      <td>08/12/23</td>
       <td>3</td>
-      <td>04/12/23</td>
-      <td>04/12/23</td>
+      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND), which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full reinspection will be within approximately three years.</td>
       <td>23/02/24</td>
       <td>18 months</td>
       <td>04/06/25</td>
-      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND), which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full reinspection will be within approximately three years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50240171">ofsted.gov.uk/50240171</a></td>
     </tr>
     <tr>
@@ -249,13 +263,14 @@
       <td>GL</td>
       <td>E09000010</td>
       <td>enfield</td>
+      <td>01/01/1900</td>
+      <td>20/03/23</td>
+      <td>24/03/23</td>
       <td>2</td>
-      <td>20/03/23</td>
-      <td>20/03/23</td>
+      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will take place within approximately 3 years.</td>
       <td>02/08/23</td>
       <td>None</td>
       <td>Next inspection time frame not found</td>
-      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will take place within approximately 3 years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50225063">ofsted.gov.uk/50225063</a></td>
     </tr>
     <tr>
@@ -264,13 +279,14 @@
       <td>GL</td>
       <td>E09000011</td>
       <td>greenwich</td>
-      <td>1</td>
+      <td>14/07/2017</td>
       <td>11/05/23</td>
       <td>19/05/23</td>
+      <td>1</td>
+      <td>The local area partnership’s special educational needs and/or disability (SEND) arrangements typically lead to positive experiences and outcomes for children and young people with SEND. The local area partnership is taking action where improvements are needed.  The next full area SEND inspection will be within approximately 5 years.</td>
       <td>11/07/23</td>
       <td>5 years</td>
       <td>11/05/28</td>
-      <td>The local area partnership’s special educational needs and/or disability (SEND) arrangements typically lead to positive experiences and outcomes for children and young people with SEND. The local area partnership is taking action where improvements are needed.  The next full area SEND inspection will be within approximately 5 years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50222861">ofsted.gov.uk/50222861</a></td>
     </tr>
     <tr>
@@ -279,13 +295,14 @@
       <td>GL</td>
       <td>E09000014</td>
       <td>haringey</td>
+      <td>01/01/1900</td>
+      <td>29/01/24</td>
+      <td>02/02/24</td>
       <td>1</td>
-      <td>29/01/24</td>
-      <td>29/01/24</td>
+      <td>The local area partnership’s special educational needs and/or disabilities (SEND) arrangements typically lead to positive experiences and outcomes for children and young people with SEND. The local area partnership is taking action where improvements are needed.  The next full area SEND inspection will be within approximately five years.</td>
       <td>03/04/24</td>
       <td>5 years</td>
       <td>29/01/29</td>
-      <td>The local area partnership’s special educational needs and/or disabilities (SEND) arrangements typically lead to positive experiences and outcomes for children and young people with SEND. The local area partnership is taking action where improvements are needed.  The next full area SEND inspection will be within approximately five years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50243302">ofsted.gov.uk/50243302</a></td>
     </tr>
     <tr>
@@ -294,13 +311,14 @@
       <td>GL</td>
       <td>E09000017</td>
       <td>hillingdon</td>
+      <td>01/01/1900</td>
+      <td>29/04/24</td>
+      <td>03/05/24</td>
       <td>2</td>
-      <td>29/04/24</td>
-      <td>29/04/24</td>
+      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately three years.</td>
       <td>12/07/24</td>
       <td>3 years</td>
       <td>29/04/27</td>
-      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately three years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50252397">ofsted.gov.uk/50252397</a></td>
     </tr>
     <tr>
@@ -309,13 +327,14 @@
       <td>GL</td>
       <td>E09000027</td>
       <td>richmond upon thames</td>
-      <td>1</td>
+      <td>18/06/2021</td>
       <td>02/10/23</td>
       <td>06/10/23</td>
+      <td>1</td>
+      <td>The local area partnership’s special educational needs and/or disability (SEND) arrangements typically lead to positive experiences and outcomes for children and young people with SEND. The local area partnership is taking action where improvements are needed.  The next full area SEND inspection will be within approximately 5 years.</td>
       <td>04/12/23</td>
       <td>5 years</td>
       <td>02/10/28</td>
-      <td>The local area partnership’s special educational needs and/or disability (SEND) arrangements typically lead to positive experiences and outcomes for children and young people with SEND. The local area partnership is taking action where improvements are needed.  The next full area SEND inspection will be within approximately 5 years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50234459">ofsted.gov.uk/50234459</a></td>
     </tr>
     <tr>
@@ -324,13 +343,14 @@
       <td>NaN</td>
       <td>E06000035</td>
       <td>medway</td>
-      <td>2</td>
+      <td>11/12/2019</td>
       <td>05/02/24</td>
       <td>09/02/24</td>
+      <td>2</td>
+      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately three years.</td>
       <td>02/04/24</td>
       <td>3 years</td>
       <td>05/02/27</td>
-      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately three years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50243176">ofsted.gov.uk/50243176</a></td>
     </tr>
     <tr>
@@ -339,13 +359,14 @@
       <td>NE</td>
       <td>E06000002</td>
       <td>middlesbrough</td>
-      <td>1</td>
+      <td>10/07/2019</td>
       <td>09/10/23</td>
       <td>13/10/23</td>
+      <td>1</td>
+      <td>The local area partnership’s special educational needs and/or disabilities (SEND) arrangements typically lead to positive experiences and outcomes for children and young people with SEND. The local area partnership is taking action where improvements are needed.  The next full area SEND inspection will be within approximately five years.</td>
       <td>08/12/23</td>
       <td>5 years</td>
       <td>09/10/28</td>
-      <td>The local area partnership’s special educational needs and/or disabilities (SEND) arrangements typically lead to positive experiences and outcomes for children and young people with SEND. The local area partnership is taking action where improvements are needed.  The next full area SEND inspection will be within approximately five years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50234957">ofsted.gov.uk/50234957</a></td>
     </tr>
     <tr>
@@ -354,13 +375,14 @@
       <td>SE</td>
       <td>E06000042</td>
       <td>milton keynes</td>
-      <td>2</td>
+      <td>12/10/2018</td>
       <td>04/03/24</td>
       <td>08/03/24</td>
+      <td>2</td>
+      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately three years.</td>
       <td>20/05/24</td>
       <td>3 years</td>
       <td>04/03/27</td>
-      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately three years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50247473">ofsted.gov.uk/50247473</a></td>
     </tr>
     <tr>
@@ -369,13 +391,14 @@
       <td>EM</td>
       <td>E06000061</td>
       <td>north northamptonshire</td>
-      <td>3</td>
+      <td>01/01/1900</td>
       <td>22/01/24</td>
       <td>26/01/24</td>
+      <td>3</td>
+      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND), which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full reinspection will be within approximately three years.</td>
       <td>25/03/24</td>
       <td>18 months</td>
       <td>22/07/25</td>
-      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND), which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full reinspection will be within approximately three years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50242696">ofsted.gov.uk/50242696</a></td>
     </tr>
     <tr>
@@ -384,13 +407,14 @@
       <td>EM</td>
       <td>E10000024</td>
       <td>nottinghamshire</td>
+      <td>24/06/2016</td>
+      <td>30/01/23</td>
+      <td>03/02/23</td>
       <td>3</td>
-      <td>30/01/23</td>
-      <td>30/01/23</td>
+      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND) which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full area SEND inspection will take place within approximately 3 years.</td>
       <td>16/05/23</td>
       <td>18 months</td>
       <td>30/07/24</td>
-      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND) which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full area SEND inspection will take place within approximately 3 years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50216722">ofsted.gov.uk/50216722</a></td>
     </tr>
     <tr>
@@ -399,13 +423,14 @@
       <td>NW</td>
       <td>E08000004</td>
       <td>oldham</td>
-      <td>3</td>
+      <td>06/10/2017</td>
       <td>26/06/23</td>
       <td>30/06/23</td>
+      <td>3</td>
+      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND), which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full reinspection will be within approximately 3 years.</td>
       <td>29/08/23</td>
       <td>18 months</td>
       <td>26/12/24</td>
-      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND), which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full reinspection will be within approximately 3 years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50226808">ofsted.gov.uk/50226808</a></td>
     </tr>
     <tr>
@@ -414,13 +439,14 @@
       <td>SE</td>
       <td>E10000025</td>
       <td>oxfordshire</td>
+      <td>17/10/2019</td>
+      <td>13/07/23</td>
+      <td>21/07/23</td>
       <td>3</td>
-      <td></td>
-      <td></td>
+      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND), which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full reinspection will be within approximately 3 years.</td>
       <td>15/09/23</td>
       <td>18 months</td>
-      <td>Last inspection date not provided</td>
-      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND), which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full reinspection will be within approximately 3 years.</td>
+      <td>13/01/25</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50228374">ofsted.gov.uk/50228374</a></td>
     </tr>
     <tr>
@@ -429,13 +455,14 @@
       <td>SW</td>
       <td>E06000026</td>
       <td>plymouth</td>
-      <td>3</td>
+      <td>14/10/2016</td>
       <td>26/06/23</td>
       <td>30/06/23</td>
+      <td>3</td>
+      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND), which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full reinspection will be within approximately 3 years.</td>
       <td>22/08/23</td>
       <td>18 months</td>
       <td>26/12/24</td>
-      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND), which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full reinspection will be within approximately 3 years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50226534">ofsted.gov.uk/50226534</a></td>
     </tr>
     <tr>
@@ -444,13 +471,14 @@
       <td>EM</td>
       <td>E06000017</td>
       <td>rutland</td>
-      <td>1</td>
+      <td>14/07/2017</td>
       <td>15/05/23</td>
       <td>19/05/23</td>
+      <td>1</td>
+      <td>The local area partnership’s arrangements typically lead to positive experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership is taking action where improvements are needed.  The next full Area SEND inspection will be within approximately 5 years.</td>
       <td>03/08/23</td>
       <td>5 years</td>
       <td>15/05/28</td>
-      <td>The local area partnership’s arrangements typically lead to positive experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership is taking action where improvements are needed.  The next full Area SEND inspection will be within approximately 5 years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50225252">ofsted.gov.uk/50225252</a></td>
     </tr>
     <tr>
@@ -459,13 +487,14 @@
       <td>WM</td>
       <td>E08000028</td>
       <td>sandwell</td>
-      <td>2</td>
+      <td>21/03/2019</td>
       <td>03/07/23</td>
       <td>07/07/23</td>
+      <td>2</td>
+      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately 3 years.</td>
       <td>12/09/23</td>
       <td>3 years</td>
       <td>03/07/26</td>
-      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately 3 years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50227802">ofsted.gov.uk/50227802</a></td>
     </tr>
     <tr>
@@ -474,13 +503,14 @@
       <td>SE</td>
       <td>E06000045</td>
       <td>southampton</td>
+      <td>01/01/1900</td>
+      <td>13/05/24</td>
+      <td>17/05/24</td>
       <td>2</td>
-      <td>13/05/24</td>
-      <td>13/05/24</td>
+      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately three years.</td>
       <td>16/07/24</td>
       <td>3 years</td>
       <td>13/05/27</td>
-      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately three years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50252575">ofsted.gov.uk/50252575</a></td>
     </tr>
     <tr>
@@ -489,13 +519,14 @@
       <td>E</td>
       <td>E06000033</td>
       <td>southend-on-sea</td>
-      <td>2</td>
+      <td>06/10/2018</td>
       <td>06/03/23</td>
       <td>10/03/23</td>
+      <td>2</td>
+      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately 3 years.</td>
       <td>09/06/23</td>
       <td>3 years</td>
       <td>06/03/26</td>
-      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately 3 years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50219405">ofsted.gov.uk/50219405</a></td>
     </tr>
     <tr>
@@ -504,13 +535,14 @@
       <td>WM</td>
       <td>E06000021</td>
       <td>stoke-on-trent</td>
+      <td>15/07/2016</td>
+      <td>29/01/24</td>
+      <td>02/02/24</td>
       <td>2</td>
-      <td>29/01/24</td>
-      <td>29/01/24</td>
+      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately three years.</td>
       <td>03/04/24</td>
       <td>3 years</td>
       <td>29/01/27</td>
-      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately three years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50243303">ofsted.gov.uk/50243303</a></td>
     </tr>
     <tr>
@@ -519,13 +551,14 @@
       <td>E</td>
       <td>E10000029</td>
       <td>suffolk</td>
-      <td>3</td>
+      <td>23/01/2019</td>
       <td>13/11/23</td>
       <td>17/11/23</td>
+      <td>3</td>
+      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND), which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full reinspection will be within approximately three years.</td>
       <td>30/01/24</td>
       <td>18 months</td>
       <td>13/05/25</td>
-      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND), which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full reinspection will be within approximately three years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50238584">ofsted.gov.uk/50238584</a></td>
     </tr>
     <tr>
@@ -534,13 +567,14 @@
       <td>SE</td>
       <td>E10000030</td>
       <td>surrey</td>
-      <td>2</td>
+      <td>21/03/2019</td>
       <td>25/09/23</td>
       <td>29/09/23</td>
+      <td>2</td>
+      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately 3 years.</td>
       <td>24/11/23</td>
       <td>3 years</td>
       <td>25/09/26</td>
-      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately 3 years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50233738">ofsted.gov.uk/50233738</a></td>
     </tr>
     <tr>
@@ -549,13 +583,14 @@
       <td>WM</td>
       <td>E06000020</td>
       <td>telford & wrekin</td>
-      <td>1</td>
+      <td>26/05/2017</td>
       <td>20/03/23</td>
       <td>24/03/23</td>
+      <td>1</td>
+      <td>The local area partnership’s arrangements typically lead to positive experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership is taking action where improvements are needed.  The next full Area SEND inspection will be within approximately 5 years.</td>
       <td>03/07/23</td>
       <td>5 years</td>
       <td>20/03/28</td>
-      <td>The local area partnership’s arrangements typically lead to positive experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership is taking action where improvements are needed.  The next full Area SEND inspection will be within approximately 5 years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50221953">ofsted.gov.uk/50221953</a></td>
     </tr>
     <tr>
@@ -564,13 +599,14 @@
       <td>NW</td>
       <td>E08000009</td>
       <td>trafford</td>
-      <td>2</td>
+      <td>01/01/1900</td>
       <td>16/10/23</td>
       <td>20/10/23</td>
+      <td>2</td>
+      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately 3 years.</td>
       <td>22/12/23</td>
       <td>3 years</td>
       <td>16/10/26</td>
-      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately 3 years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50236174">ofsted.gov.uk/50236174</a></td>
     </tr>
     <tr>
@@ -579,13 +615,14 @@
       <td>NW</td>
       <td>E06000007</td>
       <td>warrington</td>
-      <td>2</td>
+      <td>14/12/2018</td>
       <td>06/02/23</td>
       <td>10/02/23</td>
+      <td>2</td>
+      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately 3 years.</td>
       <td>05/05/23</td>
       <td>3 years</td>
       <td>06/02/26</td>
-      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately 3 years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50215729">ofsted.gov.uk/50215729</a></td>
     </tr>
     <tr>
@@ -594,13 +631,14 @@
       <td>EM</td>
       <td>E06000062</td>
       <td>west northamptonshire</td>
-      <td>3</td>
+      <td>01/01/1900</td>
       <td>18/03/24</td>
       <td>22/03/24</td>
+      <td>3</td>
+      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND), which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full reinspection will be within approximately three years.</td>
       <td>12/07/24</td>
       <td>18 months</td>
       <td>18/09/25</td>
-      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND), which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full reinspection will be within approximately three years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50252240">ofsted.gov.uk/50252240</a></td>
     </tr>
     <tr>
@@ -609,13 +647,14 @@
       <td>SE</td>
       <td>E10000032</td>
       <td>west sussex</td>
+      <td>01/01/1900</td>
+      <td>27/11/23</td>
+      <td>01/12/23</td>
       <td>2</td>
-      <td>27/11/23</td>
-      <td>27/11/23</td>
+      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately three years.</td>
       <td>29/02/24</td>
       <td>3 years</td>
       <td>27/11/26</td>
-      <td>The local area partnership’s arrangements lead to inconsistent experiences and outcomes for children and young people with special educational needs and/or disabilities (SEND). The local area partnership must work jointly to make improvements.  The next full area SEND inspection will be within approximately three years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50240577">ofsted.gov.uk/50240577</a></td>
     </tr>
     <tr>
@@ -624,13 +663,14 @@
       <td>WM</td>
       <td>E10000034</td>
       <td>worcestershire</td>
-      <td>3</td>
+      <td>03/11/2021</td>
       <td>22/04/24</td>
       <td>26/04/24</td>
+      <td>3</td>
+      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND), which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full reinspection will be within approximately three years.</td>
       <td>15/07/24</td>
       <td>18 months</td>
       <td>22/10/25</td>
-      <td>There are widespread and/or systemic failings leading to significant concerns about the experiences and outcomes of children and young people with special educational needs and/or disabilities (SEND), which the local area partnership must address urgently.  A monitoring inspection will be carried out within approximately 18 months. The next full reinspection will be within approximately three years.</td>
       <td><a href="https://files.ofsted.gov.uk/v1/file/50252437">ofsted.gov.uk/50252437</a></td>
     </tr>
   </tbody>
