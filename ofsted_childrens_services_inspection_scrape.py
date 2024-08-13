@@ -1137,7 +1137,7 @@ def save_to_html(data, column_order, local_link_column=None, web_link_column=Non
         '<a href="ofsted_childrens_services_send_overview.xlsx">download here</a> as an .xlsx file. '
         '<br/>Data summary is based on the original <i>SEND Outcomes Summary</i> published periodically by the ADCS: '
         '<a href="https://www.adcs.org.uk/inspection-of-childrens-services/">https://www.adcs.org.uk/inspection-of-childrens-services/</a>. '
-        '<a href="https://github.com/data-to-insight/ofsted-send-scrape-tool/blob/main/README.md">Read the tool/project background details and future work.</a>.'
+        '<a href="https://github.com/data-to-insight/ofsted-ilacs-scrape-tool/blob/main/README.md">Read the source ILACS tool/project background details and future work.</a>.'
     )
 
     disclaimer_text = (
