@@ -1137,16 +1137,18 @@ def save_to_html(data, column_order, local_link_column=None, web_link_column=Non
         '<a href="ofsted_childrens_services_send_overview.xlsx">download here</a> as an .xlsx file. '
         '<br/>Data summary is based on the original <i>SEND Outcomes Summary</i> published periodically by the ADCS: '
         '<a href="https://www.adcs.org.uk/inspection-of-childrens-services/">https://www.adcs.org.uk/inspection-of-childrens-services/</a>. '
-        '<a href="https://github.com/data-to-insight/ofsted-ilacs-scrape-tool/blob/main/README.md">Read the source ILACS tool/project background details and future work.</a>.'
     )
 
     disclaimer_text = (
-        'Disclaimer: This summary is built from scraped data direct from https://reports.ofsted.gov.uk/ published PDF inspection report files. '
-        'As a result of the nuances|variance within the inspection report content or pdf encoding, we\'re noting some problematic data extraction for a small number of LAs*.<br/> '
-        '*Known LA extraction issues: 01/01/1900 == No-date-data|unreadble, Enfield(Next Inspection Date not showing)<br/>'
-        '<a href="mailto:datatoinsight.enquiries@gmail.com?subject=Ofsted-Scrape-Tool">Feedback</a> on specific problems|inaccuracies|suggestions welcomed.*'
+        'Disclaimer: This summary is built from scraped data direct from https://reports.ofsted.gov.uk/ published PDF inspection report files.<br/><br/>'
+        'Nuanced|variable inspection report content, structure and pdf encoding occasionally results in problematic data extraction for a small number of LAs.<br/> '
+        'Known extraction issues: <ul>'
+        '<li>01/01/1900 == No-date-data|unreadble.</li>'
+        '<li>Enfield(Next Inspection Date not showing).</li>'
+        '</ul>'
+        '<a href="mailto:datatoinsight.enquiries@gmail.com?subject=Ofsted-SEND-Scrape-Tool">Feedback</a> highlighting problems|inaccuracies|suggestions welcomed.'
+        '<a href="https://github.com/data-to-insight/ofsted-ilacs-scrape-tool/blob/main/README.md">Read the source ILACS tool/project for background details and future work.</a>.'
     )
-
     # # testing
     # print(data.head(5))
     data = data[column_order]
