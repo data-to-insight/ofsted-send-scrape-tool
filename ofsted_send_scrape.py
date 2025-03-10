@@ -1,7 +1,9 @@
 #
 # Export options
 
-export_summary_filename = 'ofsted_childrens_services_send_overview'
+export_summary_filename = 'ofsted_csc_send_overview'
+d2i_contact_email = "datatoinsight.enquiries@gmail.com"
+
 # export_file_type         = 'csv' # Excel / csv currently supported
 export_file_type         = 'excel'
 
@@ -1131,30 +1133,39 @@ def save_to_html(data, column_order, local_link_column=None, web_link_column=Non
     """
     # Define the page title and introduction text
     page_title = "Ofsted CS SEND Inspections Overview"
-    intro_text = (
-        'Summarised outcomes of published short and standard SEND inspection reports by Ofsted, refreshed weekly.<br/>'
-        'An expanded version of the shown summary sheet, refreshed concurrently, is available to '
-        '<a href="ofsted_childrens_services_send_overview.xlsx">download here</a> as an .xlsx file. '
-        '<br/>Data summary is based on the original <i>SEND Outcomes Summary</i> published periodically by the ADCS: '
-        '<a href="https://www.adcs.org.uk/inspection-of-childrens-services/">https://www.adcs.org.uk/inspection-of-childrens-services/</a>. '
-    )
 
-    disclaimer_text = (
-        'Disclaimer: This summary is built from scraped data direct from https://reports.ofsted.gov.uk/ published PDF inspection report files.<br/><br/>'
-        'Nuanced|variable inspection report content, structure and pdf encoding occasionally results in problematic data extraction for a small number of LAs.<br/> '
-        'Known extraction issues: <ul>'
-        '<li>01/01/1900 == No-date-data|unreadble.</li>'
-        '<li>Derbyshire, Enfield, North Yorkshire, Wiltshire(<Next Inspection By Date> not generated - but detail is available in summary text).</li>'
-        '<li>Enfield, Wiltshire(<Next Inspection> timeframe not extracted - but detail is available in summary text.</li>'
-        '<li>Derbyshire, North Yorkshire (Previous, Start, End Inspection Date(s) not extracted).</li>'
-        '</ul>'
-        '<a href="mailto:datatoinsight.enquiries@gmail.com?subject=Ofsted-SEND-Scrape-Tool">Feedback</a> highlighting problems|inaccuracies|suggestions welcomed.'
-        '<a href="https://github.com/data-to-insight/ofsted-ilacs-scrape-tool/blob/main/README.md">Read the source ILACS tool/project for background details and future work.</a>.'
-    )
-    # # testing
-    # print(data.head(5))
+    intro_text = f"""
+    Summarised outcomes of published short and standard SEND inspection reports by Ofsted, refreshed weekly.<br/>
+
+    An expanded version of the shown summary sheet, refreshed concurrently, is available to 
+    <a href="{export_summary_filename}.xlsx">download here</a> as an .xlsx file. <br/>
+
+    Data summary is based on the original <i>SEND Outcomes Summary</i> published periodically by the ADCS: 
+    <a href="https://www.adcs.org.uk/inspection-of-childrens-services/">https://www.adcs.org.uk/inspection-of-childrens-services/</a>.
+    """
+
+    disclaimer_text = f"""
+    Disclaimer: This summary is built from scraped data direct from 
+    <a href="https://reports.ofsted.gov.uk/">https://reports.ofsted.gov.uk/</a> published PDF inspection report files.<br/><br/>
+
+    Nuanced | variable inspection report content, structure, and PDF encoding occasionally result in problematic data extraction for a small number of LAs.<br/>
+
+    <b>Known extraction issues:</b>
+    <ul>
+        <li><b>01/01/1900</b> == No-date-data | unreadable.</li>
+        <li>Derbyshire, Enfield, North Yorkshire, Wiltshire (<b>Next Inspection By Date</b> not generated - but detail is available in summary text).</li>
+        <li>Enfield, Wiltshire (<b>Next Inspection</b> timeframe not extracted - but detail is available in summary text).</li>
+        <li>Derbyshire, North Yorkshire (<b>Previous, Start, End Inspection Date(s)</b> not extracted).</li>
+    </ul>
+
+    <a href="mailto:{d2i_contact_email}?subject=Ofsted-SEND-Scrape-Tool">Feedback</a> highlighting problems | inaccuracies | suggestions is welcomed.<br/>
+
+    <a href="https://github.com/data-to-insight/ofsted-ilacs-scrape-tool/blob/main/README.md">
+    Read the source ILACS tool/project for background details and future work.
+    </a>.
+    """
+
     data = data[column_order]
-
 
 
     # # Convert specified columns to title case
