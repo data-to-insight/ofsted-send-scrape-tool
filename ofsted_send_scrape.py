@@ -27,22 +27,24 @@ pdf_data_capture = True # True is default (scrape within pdf inspection reports 
 
 repo_path = '/workspaces/ofsted-send-scrape-tool'
 
-
-
-
 #
 # Ofsted site/page admin settings
 
-max_page_results = 200 # Set max number of search results to show on page(MUST be > total number of LA's!) 
+
+# Define max results per page (Now limited to 100)
+max_page_results = 100  # new ofsted search limit at w/c 100225
 url_stem = 'https://reports.ofsted.gov.uk/'
 
-
-# search url equates to Ofsted base search criteria of 'childrens social care + local authority childrens services' 
+# Base search URL (excluding pagination controls)
 search_url = 'search?q=&location=&lat=&lon=&radius=&level_1_types=3&level_2_types%5B%5D=12'
-max_page_results_url = '&rows=' + str(max_page_results) # Coerce results page to display ALL providers on single results page without next/pagination
 
-# resultant complete url to process
-url = url_stem + search_url + max_page_results_url 
+# pagination params placehold
+pagination_param = '&start={start}&rows=' + str(max_page_results)
+
+start = 0
+max_results = 160  # expecting 153 @110225
+
+
 
 
 # #
@@ -173,7 +175,7 @@ def clean_provider_name(name):
     name = name.replace("royal borough of ", "").replace("city of ", "").replace("metropolitan district council", "").replace("london borough of", "").replace("council of", "")
 
     # Remove further undesired 'single' words and join the remaining parts
-    name_parts = [part for part in name.split() if part not in ['city', 'metropolitan', 'borough', 'council', 'county', 'district', 'the']]
+    name_parts = [part for part in name.split() if part not in ['city', 'metropolitan', 'borough', 'council', 'county', 'district', 'the']] 
     return ' '.join(name_parts)
 
 
@@ -264,7 +266,7 @@ def format_date_for_report(date_input, output_format_str, input_format_str=None)
 ## Need to refactor the above funcs. Lots of duplication going on
 
 
-# testing
+
 def extract_dates_from_text(text):
     """
     Extracts and cleans inspection dates from the given text.
@@ -334,8 +336,8 @@ def extract_dates_from_text(text):
             end_date_str = f"{end_day} {month} {year}"
 
         else:
-            print("Debug: No inspection dates found.")
-            raise ValueError("No inspection dates found")
+
+            raise ValueError(f"Extract_dates_from_text - No inspection dates found: {cleaned_text}")
 
     # Clean and format the extracted dates
     try:
@@ -372,6 +374,82 @@ def extract_dates_from_text(text):
     print(f"\nStart Date: {start_date}, End Date: {end_date}, Previous Inspection End Date: {previous_end_date}")
     
     return start_date, end_date, previous_end_date
+
+
+
+# # revised version with improved date handling for fallback cases previously not being picked up in main inspection date(s)
+# # this added processing then added also to previous inspection date handling in the newer below version
+# def extract_dates_from_text(text):
+#     if not text:
+#         raise ValueError("No text provided")
+
+#     # Remove non-printing characters and multiple spaces
+#     cleaned_text = re.sub(r'[^\x20-\x7E]', '', text)
+#     cleaned_text = re.sub(r'\s+', ' ', cleaned_text)
+
+#     # Fix split years (e.g., 20 23 -> 2023)
+#     cleaned_text = re.sub(r"(\b20)\s+(\d{2}\b)", r"\1\2", cleaned_text)
+
+#     # Primary regex: Both start and end dates include the year
+#     date_match = re.search(r"Inspection dates\s*:\s*(\d{1,2} \w+ \d{4}) to (\d{1,2} \w+ \d{4})", cleaned_text)
+
+#     if date_match:
+#         start_date_str = date_match.group(1).strip()
+#         end_date_str = date_match.group(2).strip()
+
+#     else:
+#         # **Fallback 1:** Year appears only once, and months **may be different**
+#         date_match = re.search(r"Inspection dates\s*:\s*(\d{1,2}) (\w+) to (\d{1,2}) (\w+) (\d{4})", cleaned_text)
+
+#         if date_match:
+#             start_day = date_match.group(1)
+#             start_month = date_match.group(2)
+#             end_day = date_match.group(3)
+#             end_month = date_match.group(4)
+#             year = date_match.group(5)
+
+#             start_date_str = f"{start_day} {start_month} {year}"
+#             end_date_str = f"{end_day} {end_month} {year}"
+
+#         else:
+#             # **Fallback 2:** Single inspection date
+#             date_match = re.search(r"Inspection dates?\s*:\s*(\d{1,2} \w+ \d{4})", cleaned_text)
+
+#             if date_match:
+#                 start_date_str = date_match.group(1).strip()
+#                 end_date_str = start_date_str  # If only one date is mentioned, assume it's the same
+#             else:
+#                 raise ValueError(f"Extract_dates_from_text - Could not identify inspection dates in: {cleaned_text}")
+
+#     # Convert extracted dates to dd/mm/yy format
+#     try:
+#         start_date = datetime.strptime(start_date_str, "%d %B %Y").strftime("%d/%m/%y")
+#         end_date = datetime.strptime(end_date_str, "%d %B %Y").strftime("%d/%m/%y")
+#     except ValueError as ve:
+#         raise ValueError(f"Date conversion failed: {ve}")
+
+#     # Handling previous inspection dates
+#     previous_inspection_match = re.search(r"Dates? of previous inspection:\s*(\d{1,2}) to (\d{1,2}) (\w+) (\d{4})", cleaned_text)
+
+#     if previous_inspection_match:
+#         previous_start_day = previous_inspection_match.group(1)
+#         previous_end_day = previous_inspection_match.group(2)
+#         previous_month = previous_inspection_match.group(3)
+#         previous_year = previous_inspection_match.group(4)
+
+#         previous_end_date_str = f"{previous_end_day} {previous_month} {previous_year}"
+
+#         try:
+#             previous_end_date = datetime.strptime(previous_end_date_str, "%d %B %Y").strftime("%d/%m/%Y")
+#         except ValueError:
+#             previous_end_date = "01/01/1900"
+#     else:
+#         previous_end_date = "01/01/1900"
+
+#     print(f"\nStart Date: {start_date}, End Date: {end_date}, Previous Inspection End Date: {previous_end_date}")
+    
+#     return start_date, end_date, previous_end_date
+
 
 
 
@@ -844,7 +922,6 @@ def process_provider_links(provider_links):
                 filename = nonvisual_text.replace(', pdf', '') + '.pdf'
 
 
-
                 # # For reference:
                 # # at this point, example var contents would be: 
                 # print(f"pdflink:{pdf_link}")                # e.g. "<a class="publication-link" href="https://files.ofsted.gov.uk/v1/file/50252437" target="_blank">
@@ -1300,23 +1377,34 @@ def save_to_html(data, column_order, local_link_column=None, web_link_column=Non
 #
 # Scrape Ofsted inspection report data
 #
+
 data = []
-while True:
-    # Fetch and parse the HTML content of the current URL
+while start < max_results:
+    # Construct URL for current chunk
+    url = url_stem + search_url + pagination_param.format(start=start)
+
+    print(f"Fetching: {url}")  # Debug output
+
+    # Fetch and parse search page
     soup = get_soup(url)
-    
-    # Find all 'provider' links on the page
+
+    if soup is None:
+        print("⚠️ ERROR: No content retrieved, stopping.")
+        break
+
+    # Find provider links
     provider_links = soup.find_all('a', href=lambda href: href and '/provider/' in href)
 
+    print(f"🔍 DEBUG: Found {len(provider_links)} provider links on page {start}-{start + max_page_results}")
 
-    # Process the provider links and extend the data list with the results
+    if not provider_links:
+        break  # no more results found
+
+    # provider links
     data.extend(process_provider_links(provider_links))
 
-    
-    # Since all results are on a single page, no need to handle pagination. 
-    # Processing complete.   
-    break
-
+    # continue on next batch (if there is)
+    start += max_page_results
 
 
 # Convert the 'data' list to a DataFrame
