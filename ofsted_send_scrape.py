@@ -25,7 +25,19 @@ pdf_data_capture = True # True is default (scrape within pdf inspection reports 
                         # False == only pdfs/list of LA's+link to most recent exported. Not inspection results.
 
 
-repo_path = '/workspaces/ofsted-send-scrape-tool'
+
+# Needed towards git actions workflow
+# Use GITHUB_WORKSPACE env var if available(workflow actions), 
+# otherwise fall back to the default path(codespace).
+repo = os.environ.get('GITHUB_WORKSPACE', '/workspaces/ofsted-send-scrape-tool')
+
+try:
+    repo_path = git.Repo(repo)
+except git.exc.NoSuchPathError:
+    print(f"Error initialising repo path for inspection reports: {repo}")
+    raise
+
+
 
 #
 # Ofsted site/page admin settings
@@ -92,11 +104,7 @@ try:
 except ModuleNotFoundError:
     print("Please install 'openpyxl' and 'xlsxwriter' using pip")
 
-try:
-    from sklearn.metrics.pairwise import cosine_similarity
-    from sklearn.feature_extraction.text import CountVectorizer
-except ModuleNotFoundError:
-    print("Please install 'scikit-learn' using pip")
+
 
 # Configure logging/logging module
 import warnings
