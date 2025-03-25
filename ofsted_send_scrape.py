@@ -26,19 +26,6 @@ pdf_data_capture = True # True is default (scrape within pdf inspection reports 
 
 
 
-# Needed towards git actions workflow
-# Use GITHUB_WORKSPACE env var if available(workflow actions), 
-# otherwise fall back to the default path(codespace).
-repo = os.environ.get('GITHUB_WORKSPACE', '/workspaces/ofsted-send-scrape-tool')
-
-try:
-    repo_path = git.Repo(repo)
-except git.exc.NoSuchPathError:
-    print(f"Error initialising repo path for inspection reports: {repo}")
-    raise
-
-
-
 #
 # Ofsted site/page admin settings
 
@@ -58,15 +45,11 @@ max_results = 160  # expecting 153 @110225
 
 
 
-
 # #
 # # In progress Ofsted site/search link refactoring
 
 # search_category = 3         # Default 3  == 'Childrens social care' (range 1 -> 4)
 # search_sub_category = 12    # Default 12 == 'Local Authority Childrens Services' (range 8 -> 12)
-
-# url_search_stem = 'search?q=&location=&radius='
-# url = url_stem + url_search_stem + '&level_1_types=' + str(search_category) + '&level_2_types=' + str(search_sub_category) + max_page_results_url
 
 
 #
@@ -120,6 +103,21 @@ logging.getLogger('org.apache.pdfbox').setLevel(logging.ERROR)
 warnings.filterwarnings('ignore')
 
 logging.basicConfig(filename='output.log', level=logging.INFO, format='%(asctime)s - %(message)s')
+
+
+
+# Needed towards git actions workflow
+# Use GITHUB_WORKSPACE env var(str) if available(workflow actions), 
+# otherwise fall back to the default path(codespace).
+repo_path = os.environ.get('GITHUB_WORKSPACE', '/workspaces/ofsted-jtai-scrape-tool')
+print("Using repo path:", repo_path)
+
+try:
+    # repo object using path string
+    repo = git.Repo(repo_path)
+except git.exc.NoSuchPathError:
+    print(f"Error initialising repo path for inspection reports: {repo_path}")
+    raise
 
 
 
@@ -1291,12 +1289,15 @@ def save_to_html(data, column_order, local_link_column=None, web_link_column=Non
     # specific folder to monitor for changes
     inspection_reports_folder = 'export_data/inspection_reports'
 
-    try:
-        # Init the repo object (so we know starting point for monitoring changes)
-        repo = git.Repo(repo_path) 
-    except Exception as e:
-        print(f"Error initialising defined repo path for inspection reports: {e}")
-        raise
+
+    ## moved/set elsewhere to enable git workflows - deleted after testing
+    # try:
+    #     # Init the repo object (so we know starting point for monitoring changes)
+    #     repo = git.Repo(repo_path) 
+    # except Exception as e:
+    #     print(f"Error initialising defined repo path for inspection reports: {e}")
+    #     raise
+    
     
     try:
     # Get current status of repo
