@@ -1249,6 +1249,8 @@ def save_to_html(data, column_order, local_link_column=None, web_link_column=Non
     """
 
     data = data[column_order]
+    global repo  # Use repo object initialised earlier
+
 
 
     # # Convert specified columns to title case
