@@ -3,9 +3,10 @@ On demand Ofsted SEND results summary via inspection reports scrape from the Ofs
 Published: https://data-to-insight.github.io/ofsted-send-scrape-tool/
 -
 
-### The inspection reports output summary is refreshed on at least weekly basis, the last updated timestamp provided for reference. 
+### The inspection reports output summary is refreshed daily and timestamped for reference. 
 
 ## Brief overview
+Note: The scrape only pulls those LA's that have a published report within the revised, post 2023 framework.
 This project is based on a proof-of-concept, 'can we do this' basis. As such it's supplied very much with the disclaimer of please check the vitals if you're embedding it into something more critical, and likewise pls feel free to feedback into the project with suggestions. The structure of the code and processes have much scope for improvement, but some of the initial emphasis was on maintaining a level of readability so that others might have an easier time of taking it further. That said, we needed to take some of the scrape/cleaning processes further than anticipated due to inconsistencies in the source site/data and this has ultimately impacted the intended 're-usable mvp' approach to codifying a solution for the original problem. 
 
 The results structure and returned data is based almost entirely on the originating SEND Summary produced/refreshed periodically by the ADCS; the use of which has previously underpinned several D2I projects. We're aware of several similar collections of longer-term work on and surrounding the Ofsted results theme, and would be happy to hear from those who perhaps also have bespoke ideas for changes here that would assist their own work. 
@@ -19,15 +20,15 @@ There are currently three exports from the script.
 Generated (as ./index.html) to display a refreshed subset of the SEND results summary. 
 
 ### Results Overview Summary
-The complete SEND overview spreadsheet, exported to the git project root ./ as an .xlsx file for ease and also accessible via a download link from the generated results page (index.html)
+The complete SEND overview spreadsheet, exported to the git project root ./ as an .xlsx file for ease and also accessible via a download link from the generated results page (index.html). 
 
-### All CS inspections reports
-During the scrape process, because we scan all the related CS inspection pdf reports for each LA; these can be/are packaged up into tidy LA named folders (urn_LAname) within the git repo (./export_data/inspection_reports/). There is a lot of data here, but if you download the entire export_data folder after the script has run, with the overview summary sheet then the local_inspection_reports column active links will work and you can then easily access each LA's previous reports all in once place via the supplied hyperlink(s). *Note:* This is currently not an option when viewing the results on the web page/Git Pages.
+### All CSC inspections reports
+During the scrape process, because we scan all the related CSC inspection pdf reports for each LA; these can be/are packaged up into tidy LA named folders (urn_LAname) within the git repo (./export_data/inspection_reports/). There is a lot of data here, but if you download the entire export_data folder after the script has run, with the overview summary sheet then the local_inspection_reports column active links will work and you can then easily access each LA's previous reports all in once place via the supplied hyperlink(s). *Note:* This is currently not an option when viewing the results on the web page/Git Pages.
 
 ## Known Bugs
 Some LA's inspection reports have PDF encoding or inconsistent data in the published reports that is causing extraction issues & null data. 
 We're working to address these, current known  issues are:
-- tbc
+- The scrape only pulls those LA's that have a published report within the revised, post 2023 framework. We're considering whether/how best to include those inspections based both on previous frameworks and those with a written statement of action. 
 
 
 ## Imports(s)

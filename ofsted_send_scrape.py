@@ -1221,7 +1221,7 @@ def save_to_html(data, column_order, local_link_column=None, web_link_column=Non
     page_title = "Ofsted CS SEND Inspections Overview"
 
     intro_text = f"""
-    Summarised outcomes of published short and standard SEND inspection reports by Ofsted, refreshed weekly.<br/>
+    Summarised outcomes of published short and standard SEND inspection reports by Ofsted, refreshed daily.<br/>
 
     An expanded version of the shown summary sheet, refreshed concurrently, is available to 
     <a href="{export_summary_filename}.xlsx">download here</a> as an .xlsx file. <br/>
