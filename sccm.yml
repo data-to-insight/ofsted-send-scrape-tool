@@ -43,7 +43,7 @@ sccm_alignment:
         - published_date
 
     - name: SENDObservation
-      label: SEND Judgement
+      label: SEND Judgements
       description: The outcome(s) recorded during an inspection (e.g. overall effectiveness)
       type: OBSERVATION
       properties:
@@ -51,13 +51,13 @@ sccm_alignment:
         - judgement_grade
 
     - name: SENDInspectionSummary
-      label: SEND Inspection Summary
+      label: SEND Inspection Report
       description: The outcome (judgement and findings) of a specific SEND inspection event
       type: STATE
 
     - name: CombinedSENDInspectionsSummary
       label: Combined SEND Summary
-      description: A compiled view of all related inspection results, generated from published summaries for each LA
+      description: A scraped and compiled view of all related inspection results, generated from published summaries for each LA
       type: COLLECTION
       properties:
         - generated_date
@@ -121,8 +121,8 @@ sccm_alignment:
       predicate: stateOf
       object: LocalAuthorityChildrensSocialCare
 
-    - subject: SENDInspectionEvent
-      predicate: records
+    - subject: SENDInspectionSummary
+      predicate: results_in
       object: SENDObservation
 
     - subject: Ofsted_SEND_Scrape_Tool
