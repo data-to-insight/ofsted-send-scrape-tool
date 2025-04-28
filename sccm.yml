@@ -55,16 +55,16 @@ sccm_alignment:
       description: The outcome (judgement and findings) of a specific SEND inspection event
       type: STATE
 
-    - name: CombinedILACSInspectionsSummary
-      label: Combined SEND Inspections Summary
-      description: A compiled view of all inspection results, generated from published summaries
+    - name: CombinedSENDInspectionsSummary
+      label: Combined SEND Summary
+      description: A compiled view of all related inspection results, generated from published summaries for each LA
       type: COLLECTION
       properties:
         - generated_date
         - version
 
     - name: Ofsted_SEND_Scrape_Tool
-      label: SEND Scraper Tool
+      label: SEND Scrape Tool
       description: A Python tool that extracts published Ofsted inspection summaries into a combined dataset
       type: METHOD
 
