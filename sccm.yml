@@ -51,12 +51,12 @@ sccm_alignment:
         - judgement_grade
 
     - name: SENDInspectionSummary
-      label: SEND Inspection Report
+      label: SEND Report
       description: The outcome (judgement and findings) of a specific SEND inspection event
       type: STATE
 
     - name: CombinedSENDInspectionsSummary
-      label: Combined SEND Summary
+      label: SEND Summary
       description: A scraped and compiled view of all related inspection results, generated from published summaries for each LA
       type: COLLECTION
       properties:
