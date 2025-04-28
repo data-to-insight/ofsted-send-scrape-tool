@@ -75,7 +75,7 @@ sccm_alignment:
 
     - name: LIIADashboards
       label: LIIA PowerBI Dashboard
-      description: A dashboard powered by CombinedILACSInspectionsSummary to inform regional strategy and cross-LA/region performance monitoring
+      description: A dashboard powered by Combined Inspections Summary to inform regional strategy and cross-LA/region performance monitoring
       type: FUNCTION
 
     - name: Place
@@ -131,13 +131,13 @@ sccm_alignment:
 
     - subject: Ofsted_SEND_Scrape_Tool
       predicate: produces
-      object: CombinedILACSInspectionsSummary
+      object: CombinedSENDInspectionsSummary
 
     - subject: LondonInnovationAndImprovementAlliance
       predicate: uses
-      object: CombinedILACSInspectionsSummary
+      object: CombinedSENDInspectionsSummary
 
-    - subject: CombinedILACSInspectionsSummary
+    - subject: CombinedSENDInspectionsSummary
       predicate: informs
       object: LIIADashboards
 
