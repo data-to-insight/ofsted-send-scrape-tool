@@ -56,8 +56,8 @@ sccm_alignment:
       type: STATE
 
     - name: AllInspectionsSummary
-      label: All SEND Summary
-      description: A compiled view of all SEND inspection results, generated from published summaries
+      label: All SEND Inspections Summary
+      description: A compiled view of all inspection results, generated from published summaries
       type: COLLECTION
       properties:
         - generated_date
