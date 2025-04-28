@@ -50,7 +50,7 @@ sccm_alignment:
         - judgement_type
         - judgement_grade
 
-    - name: InspectionSummary
+    - name: SENDInspectionSummary
       label: SEND Inspection Summary
       description: The outcome (judgement and findings) of a specific SEND inspection event
       type: STATE
@@ -115,9 +115,9 @@ sccm_alignment:
 
     - subject: SENDInspectionEvent
       predicate: hasOutcome
-      object: InspectionSummary
+      object: SENDInspectionSummary
 
-    - subject: InspectionSummary
+    - subject: SENDInspectionSummary
       predicate: stateOf
       object: LocalAuthorityChildrensSocialCare
 
@@ -127,7 +127,7 @@ sccm_alignment:
 
     - subject: Ofsted_SEND_Scrape_Tool
       predicate: extracts_from
-      object: InspectionSummary
+      object: SENDInspectionSummary
 
     - subject: Ofsted_SEND_Scrape_Tool
       predicate: produces
@@ -159,7 +159,7 @@ sccm_alignment:
 
     - subject: LocalAuthority
       predicate: learns_from
-      object: InspectionSummary
+      object: SENDInspectionSummary
 
 
 data_layers:
