@@ -13,7 +13,7 @@ sccm_alignment:
     - name: DepartmentForEducation
       label: DfE
       description: Government department responsible for education and children's services in England
-      type: ORGANIZATION
+      type: ORGANISATION
 
     - name: Ofsted
       label: Ofsted
