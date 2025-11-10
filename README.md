@@ -3,7 +3,7 @@ On demand Ofsted SEND results summary via inspection reports scrape from the Ofs
 Published: https://data-to-insight.github.io/ofsted-send-scrape-tool/
 -
 
-### The inspection reports output summary is refreshed daily and timestamped for reference. 
+### The inspection reports output summary is refreshed weekly and timestamped for reference. 
 
 ## Brief overview
 Note: The scrape only pulls those LA's that have a published report within the revised, post 2023 framework.
