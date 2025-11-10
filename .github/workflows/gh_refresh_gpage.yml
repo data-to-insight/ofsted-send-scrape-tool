@@ -25,7 +25,9 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
+          cache: 'pip'                         # enable pip cache
+          cache-dependency-path: requirements.txt
+                    
       # fail fast if wheels not available for heavy deps on runner
       - name: Guard, numpy and scipy must have wheels
         run: |
