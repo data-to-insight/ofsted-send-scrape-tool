@@ -1,4 +1,4 @@
-# Workflow runs the scrape process to refresh/update daily
+# run scrape process to refresh/update weekly
 
 on:
   push:
