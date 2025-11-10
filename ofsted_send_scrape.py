@@ -54,44 +54,41 @@ max_results = 160  # expecting 153 @110225
 
 #
 # Script admin settings
-
-# Standard library imports
+# Standard library
 import os
 import io
 import re
-import json
+import time
 from datetime import datetime, timedelta
+import warnings
+import logging
 
-# Third-party library imports
+# Third-party
 import requests
-import git # possible case for just: from git import Repo
-from requests.exceptions import RequestException
+from requests.exceptions import RequestException, Timeout, HTTPError
 import pandas as pd
-import numpy as np
 from bs4 import BeautifulSoup
 from dateutil.relativedelta import relativedelta
+import git
 
-
-# pdf search/data extraction
+# PDF processing
 try:
     import fitz  # PyMuPDF
-    import tabula  
-    import PyPDF2  
+    import PyPDF2
 except ModuleNotFoundError:
-    print("Please install 'tabula-py' and 'PyPDF2' using pip")
+    print("install 'PyMuPDF' and 'PyPDF2' using pip")
 
-
-# handle optional excel export+active file links
+# Excel export
 try:
     import xlsxwriter
 except ModuleNotFoundError:
-    print("Please install 'openpyxl' and 'xlsxwriter' using pip")
+    print("install 'xlsxwriter' using pip")
 
-
-
-# Configure logging/logging module
-import warnings
-import logging
+# -- removed 101125 --- 
+# json
+# numpy as np
+# tabula
+# -- 
 
 # wipe / reset the logging file 
 with open('output.log', 'w'):
@@ -109,7 +106,7 @@ logging.basicConfig(filename='output.log', level=logging.INFO, format='%(asctime
 # Needed towards git actions workflow
 # Use GITHUB_WORKSPACE env var(str) if available(workflow actions), 
 # otherwise fall back to the default path(codespace).
-repo_path = os.environ.get('GITHUB_WORKSPACE', '/workspaces/ofsted-jtai-scrape-tool')
+repo_path = os.environ.get('GITHUB_WORKSPACE', '/workspaces/ofsted-send-scrape-tool')
 print("Using repo path:", repo_path)
 
 try:
