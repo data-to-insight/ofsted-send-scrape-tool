@@ -19,29 +19,41 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y gfortran
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
-          
+          python-version: '3.12'
+
+      # fail fast if wheels not available for heavy deps on runner
+      - name: Guard, numpy and scipy must have wheels
+        run: |
+          python -m pip install --upgrade pip wheel
+          pip download --only-binary=:all: --no-deps "numpy>=1.26" "scipy==1.15.2" \
+            || { echo "::error::Wheel missing for numpy or scipy, check Python pin or versions"; exit 1; }
+
+      - name: Install Python dependencies
+        env:
+          PIP_ONLY_BINARY: numpy,scipy
+        run: |
+          pip install -r requirements.txt
+
+
       - name: Show Current Directory
         run: |
           echo "Current directory: $(pwd)"
           echo "Listing files:"
           ls -la
-
+          
+      # tell pip use wheels only on NumPy and SciPy(or ':all:'), not build from source
       - name: Install Python dependencies
+        env:
+          PIP_ONLY_BINARY: numpy,scipy
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
+          
       - name: Ensure script is executable
         run: chmod +x ofsted_send_scrape.py
 
